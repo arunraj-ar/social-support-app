@@ -2,6 +2,8 @@
 import { useState, useEffect } from "react"
 import { darkTheme, lightTheme } from "../assets/theme"
 
+// Custom hook to manage and provide theming (light/dark) based on user preference or system settings
+
 export function useTheme() {
   const [isDark, setIsDark] = useState(
     window.matchMedia &&

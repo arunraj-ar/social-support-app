@@ -1,3 +1,5 @@
+// Function to request writing suggestion from backend API using provided prompt
+
 export async function requestWriteSuggestion(prompt) {
   const resp = await fetch("/api/generate", {
     method: "POST",
