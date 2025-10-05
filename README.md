@@ -26,7 +26,7 @@ Icons are svg from Google Fonts Material Icons.
 
 ## Note
 
-1. Translation is properly mapped on home page, success page, and the header component only.
+1. Translation is properly mapped on home page, Personal Information page, Help Me Write Modal, success page, and the header component only.
 2. RTL works for whole UI upon Arabic language selection.
 3. The form uses theme to have light and dark themes, and easier customizations. Dark or light theme selection happens based on device settings.
 
