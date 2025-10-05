@@ -9,6 +9,7 @@ import SelectInput from "../components/SelectInput";
 import PhoneInput from "../components/PhoneInput";
 import EmailInput from "../components/EmailInput";
 import FormNavigation from "../components/FormNavigation";
+import { useTranslation } from "react-i18next";
 
 // Personal Information Page Component - Collects user's personal details
 
@@ -17,6 +18,7 @@ export default function PersonalInfo() {
   const { data, update, clear } = useFormData();
   const navigate = useNavigate();
   const today = new Date().toISOString().split("T")[0];
+  const { t } = useTranslation();
 
   const {
     register,
@@ -44,10 +46,10 @@ export default function PersonalInfo() {
       onSubmit={handleSubmit(onSubmit)}
       className={`${theme.card} ${theme.layers.surface} w-full max-w-3xl space-y-5`}
     >
-      <h2 className="text-xl font-semibold mb-2">Personal Information</h2>
+      <h2 className="text-xl font-semibold mb-2">{t("personal.title")}</h2>
 
       <TextInput
-        label="Full Name"
+        label={t("personal.name")}
         name="name"
         register={register}
         required
@@ -55,7 +57,7 @@ export default function PersonalInfo() {
       />
 
       <TextInput
-        label="National ID"
+        label={t("personal.id")}
         name="nationalId"
         register={register}
         required
@@ -63,7 +65,7 @@ export default function PersonalInfo() {
       />
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <DateInput
-          label="Date of Birth"
+          label={t("personal.dob")}
           name="dob"
           register={register}
           required
@@ -72,22 +74,22 @@ export default function PersonalInfo() {
         />
 
         <SelectInput
-          label="Gender"
+          label={t("personal.gender")}
           name="gender"
           register={register}
           required
           error={errors.gender}
           options={[
-            { value: "female", label: "Female" },
-            { value: "male", label: "Male" },
-            { value: "other", label: "Other" },
+            { value: "female", label: t("personal.genderOptions.female") },
+            { value: "male", label: t("personal.genderOptions.male") },
+            { value: "other", label: t("personal.genderOptions.other") },
           ]}
-          placeholder="Select"
+          placeholder={t("personal.select")}
         />
       </div>
 
       <TextInput
-        label="Address"
+        label={t("personal.address")}
         name="address"
         register={register}
         error={errors.address}
@@ -96,21 +98,21 @@ export default function PersonalInfo() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <TextInput
-          label="City"
+          label={t("personal.city")}
           name="city"
           register={register}
           error={errors.city}
           required
         />
         <TextInput
-          label="State"
+          label={t("personal.state")}
           name="state"
           register={register}
           error={errors.state}
           required
         />
         <TextInput
-          label="Country"
+          label={t("personal.country")}
           name="country"
           register={register}
           error={errors.country}
@@ -120,19 +122,20 @@ export default function PersonalInfo() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <PhoneInput
-          label="Phone"
+          label={t("personal.phone")}
           name="phone"
           register={register}
           required
           // add custom validation based on country
           error={errors.phone}
+          placeholder={t("error.enterPhone")}
         />
 
         <EmailInput
-          label="Email"
+          label={t("personal.email")}
           name="email"
           register={register}
-          required={{ value: true, message: "Email is required" }}
+          required={{ value: true, message: `${t("personal.email")} ${t("error.required")}` }}
           error={errors.email}
         />
       </div>

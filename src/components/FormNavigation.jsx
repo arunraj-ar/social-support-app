@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
+import { useTranslation } from "react-i18next";
 
 // Form Navigation Component - Renders navigation buttons back, next, cancel and submit for form steps
 // Cancel and submit clears the form from context and localStorage
@@ -15,6 +16,7 @@ export default function FormNavigation({
 }) {
   const navigate = useNavigate();
   const { theme } = useTheme();
+  const {t } = useTranslation();
 
   return (
     <div className="flex justify-between pt-6">
@@ -24,7 +26,7 @@ export default function FormNavigation({
           onClick={() => { onClear(); navigate(backTo); }}
           className={`${theme.buttons.base} ${theme.buttons.danger} cursor-pointer`}
         >
-          Cancel
+          {t("buttons.cancel")}
         </button>
       ) : (
         <button
@@ -39,7 +41,7 @@ export default function FormNavigation({
               : `${theme.buttons.warning} cursor-pointer`
           }`}
         >
-          Back
+          {t("buttons.back")}
         </button>
       )}
 
@@ -50,7 +52,7 @@ export default function FormNavigation({
           className={`${theme.buttons.base} ${theme.buttons.success} cursor-pointer`}
           disabled={isSubmitting}
         >
-          Submit
+          {t("buttons.submit")}
         </button>
       ) : (
         <button
@@ -58,7 +60,7 @@ export default function FormNavigation({
           onClick={() => nextTo && navigate(nextTo)}
           className={`${theme.buttons.base} ${theme.buttons.success} cursor-pointer`}
         >
-          Next
+          {t("buttons.next")}
         </button>
       )}
     </div>

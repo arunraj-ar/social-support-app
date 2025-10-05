@@ -1,6 +1,7 @@
-import clsx from "clsx"
-import { useTheme } from "../hooks/useTheme"
-import { normalizeValidation } from "../utils/validations"
+import clsx from "clsx";
+import { useTheme } from "../hooks/useTheme";
+import { normalizeValidation } from "../utils/validations";
+import { useTranslation } from "react-i18next";
 
 // TextArea component with validation and theming support
 
@@ -17,11 +18,17 @@ export default function TextArea({
   textareaClassName = "",
   ...rest
 }) {
-  const { theme } = useTheme()
-  const baseLayer = theme.layers?.base || "bg-white text-gray-900"
-  const dangerColor = theme.colors?.danger || "text-red-600"
+  const { theme } = useTheme();
+  const baseLayer = theme.layers?.base || "bg-white text-gray-900";
+  const dangerColor = theme.colors?.danger || "text-red-600";
+  const { t } = useTranslation();
 
-  const validation = normalizeValidation(required, rules, null, `${label || name} is required`)
+  const validation = normalizeValidation(
+    required,
+    rules,
+    null,
+    `${label || name} ${t("error.required")}`
+  );
 
   return (
     <div className={clsx("flex flex-col", className)}>
@@ -57,5 +64,5 @@ export default function TextArea({
         </p>
       )}
     </div>
-  )
+  );
 }

@@ -4,6 +4,7 @@ import { useTheme } from "../hooks/useTheme";
 import TextArea from "./TextAreaInput";
 import { requestWriteSuggestion } from "../api/openai";
 import { icons } from "../assets/icons";
+import { useTranslation } from "react-i18next";
 
 // HelpMeWrite Component - Provides AI-generated text suggestions for form fields, holds the button and Modal that gives AI suggestions.
 
@@ -12,6 +13,7 @@ export default function HelpMeWrite({
   buildPrompt,
   formData,
   onAccept,
+  helpingFieldLabel,
 }) {
   const { theme } = useTheme();
   const [open, setOpen] = useState(false);
@@ -19,6 +21,7 @@ export default function HelpMeWrite({
   const [error, setError] = useState(null);
   const [suggestion, setSuggestion] = useState("");
   const [edited, setEdited] = useState("");
+  const { t } = useTranslation();
 
   async function fetchSuggestion() {
     setError(null);
@@ -79,7 +82,7 @@ export default function HelpMeWrite({
             {icons.star}
           </span>
 
-          <span className="leading-none">Help Me Write</span>
+          <span className="leading-none">{t("help.helpMeWrite")}</span>
         </button>
       </div>
 
@@ -102,20 +105,20 @@ export default function HelpMeWrite({
                 id={`helpme-${fieldKey}-title`}
                 className="text-lg font-semibold"
               >
-                Suggestion for {fieldKey}
+                {t("help.suggestion")} {helpingFieldLabel}
               </h3>
               <button
                 onClick={closeModal}
                 aria-label="Close"
                 className="text-sm text-gray-500 cursor-pointer"
               >
-                Close
+                {t("help.close")}
               </button>
             </div>
 
             <div className="mt-4">
               {loading ? (
-                <div className="p-6 text-center">Generating suggestion…</div>
+                <div className="p-6 text-center">{t("help.generating")}</div>
               ) : error ? (
                 <div className="p-4 text-sm text-red-600">{error}</div>
               ) : (
@@ -137,7 +140,7 @@ export default function HelpMeWrite({
                 disabled={!suggestion || loading}
                 className={`${theme.buttons.base} ${theme.buttons.warning} cursor-pointer`}
               >
-                Reset
+                {t("help.reset")}
               </button>
 
               <button
@@ -146,7 +149,7 @@ export default function HelpMeWrite({
                 disabled={loading || !edited}
                 className={`${theme.buttons.base} ${theme.buttons.success} cursor-pointer`}
               >
-                Accept
+                {t("help.accept")}
               </button>
             </div>
           </div>

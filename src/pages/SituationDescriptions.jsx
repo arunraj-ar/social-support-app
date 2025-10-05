@@ -18,6 +18,7 @@ const SituationDescriptions = () => {
   const navigate = useNavigate();
   const [submitting, setSubmitting] = useState(false);
   const language = useTranslation().i18n.language;
+  const { t } = useTranslation();
 
 
   const {
@@ -84,6 +85,7 @@ const onSubmit = async (values) => {
           <div className="md:flex-none flex items-end">
             <HelpMeWrite
               fieldKey="financial"
+              helpingFieldLabel={t("situation.financialLabel")}
               buildPrompt={buildPromptFor("financial", language)}
               formData={data}
               onAccept={(val) => {
@@ -113,6 +115,7 @@ const onSubmit = async (values) => {
           <div className="md:flex-none flex items-end">
             <HelpMeWrite
               fieldKey="employment"
+              helpingFieldLabel={t("situation.employmentLabel")}
               buildPrompt={buildPromptFor("employment", language)}
               formData={data}
               onAccept={(val) => {
@@ -142,6 +145,7 @@ const onSubmit = async (values) => {
          <div className="md:flex-none flex items-end">
             <HelpMeWrite
               fieldKey="reason"
+              helpingFieldLabel={t("situation.reasonLabel")}
               buildPrompt={buildPromptFor("reason", language)}
               formData={data}
               onAccept={(val) => {

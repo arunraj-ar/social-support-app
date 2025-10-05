@@ -1,6 +1,7 @@
-import clsx from "clsx"
-import { useTheme } from "../hooks/useTheme"
-import { normalizeValidation } from "../utils/validations"
+import clsx from "clsx";
+import { useTheme } from "../hooks/useTheme";
+import { normalizeValidation } from "../utils/validations";
+import { useTranslation } from "react-i18next";
 
 // Select input component with validation and theming support
 
@@ -18,12 +19,13 @@ export default function SelectInput({
   defaultValue = "",
   ...rest
 }) {
-  const { theme } = useTheme()
+  const { theme } = useTheme();
+  const { t } = useTranslation();
 
-  const wrapperCls = clsx("flex flex-col", className)
-  const labelCls = clsx("text-sm font-medium mb-1 block", theme.app || "")
-  const baseLayer = theme.layers?.base || "bg-white text-gray-900"
-  const dangerColor = theme.colors?.danger || "text-red-600"
+  const wrapperCls = clsx("flex flex-col", className);
+  const labelCls = clsx("text-sm font-medium mb-1 block", theme.app || "");
+  const baseLayer = theme.layers?.base || "bg-white text-gray-900";
+  const dangerColor = theme.colors?.danger || "text-red-600";
 
   const selectCls = clsx(
     "w-full border rounded-md p-2 text-sm transition-colors duration-150 focus:outline-none focus:ring-2",
@@ -32,8 +34,13 @@ export default function SelectInput({
       ? "border-red-500 focus:border-red-500 focus:ring-red-300"
       : "border-gray-300 focus:border-blue-500 focus:ring-blue-200",
     selectClassName
-  )
-  const validation = normalizeValidation(required, rules, null, `${label || name} is required`)
+  );
+  const validation = normalizeValidation(
+    required,
+    rules,
+    null,
+    `${label || name} ${t("error.required")}`
+  );
 
   return (
     <div className={wrapperCls}>
@@ -72,5 +79,5 @@ export default function SelectInput({
         </p>
       )}
     </div>
-  )
+  );
 }

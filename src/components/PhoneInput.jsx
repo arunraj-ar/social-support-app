@@ -2,6 +2,7 @@
 import clsx from "clsx"
 import { normalizeValidation } from "../utils/validations"
 import { useTheme } from "../hooks/useTheme"
+import { useTranslation } from "react-i18next";
 
 // Phone input component with validation and theming support
 
@@ -18,15 +19,16 @@ export default function PhoneInput({
   ...rest
 }) {
   const { theme } = useTheme()
+  const {t} = useTranslation();
   const baseLayer = theme.layers?.base || "bg-white text-gray-900"
   const dangerColor = theme.colors?.danger || "text-red-600"
 
   const defaultPattern = {
     value: /^[0-9+\-() ]{7,15}$/,
-    message: "Enter a valid phone number",
+    message: t("error.validPhone"),
   }
 
-  const validation = normalizeValidation(required, rules, defaultPattern, "Phone number is required")
+  const validation = normalizeValidation(required, rules, defaultPattern, `${t("personal.phone")} ${t("error.required")}`)
 
   return (
     <div className={clsx("flex flex-col", className)}>

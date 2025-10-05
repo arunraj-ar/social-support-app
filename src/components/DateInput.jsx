@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { useTheme } from "../hooks/useTheme";
 import { normalizeValidation } from "../utils/validations";
+import { useTranslation } from "react-i18next";
 
 // Date input component with validation and theming support max provides max limit of the date that can be choosed.
 
@@ -17,13 +18,14 @@ export default function DateInput({
   ...rest
 }) {
   const { theme } = useTheme();
+  const { t } = useTranslation();
 
 
   const validation = normalizeValidation(
     required,
     rules,
     null,
-    `${label || "Date"} is required`
+    `${label || "Date"} ${t("error.required")}`
   );
 
   return (

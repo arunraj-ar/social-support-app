@@ -2,6 +2,7 @@
 import clsx from 'clsx'
 import { useTheme } from '../hooks/useTheme'
 import { normalizeValidation } from '../utils/validations'
+import { useTranslation } from 'react-i18next';
 
 // Text input component with validation and theming support
 
@@ -20,12 +21,13 @@ export default function TextInput({
   ...rest
 }) {
   const { theme: themeObj } = useTheme()
-  const tid = id || name
+  const tid = id || name;
+  const { t } = useTranslation();
 
   const baseLayer = themeObj.layers?.base || 'bg-white text-gray-900'
   const dangerColor = themeObj.colors?.danger || 'text-red-600'
 
-  const validation = normalizeValidation(required, rules, null, `${label || name} is required`)
+  const validation = normalizeValidation(required, rules, null, `${label || name} ${t("error.required")}`)
 
   const inputCls = clsx(
     'rounded-md border p-2 text-sm transition-colors duration-150 focus:outline-none focus:ring-2',
